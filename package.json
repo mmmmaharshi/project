@@ -1,5 +1,7 @@
 {
   "name": "time-systems",
+  "description": "Stay in sync with global time standards and easily track time across systems like GPS, UTC, and TAI.",
+  "author": "Manohar Maharshi (https://github.com/mmmmaharshi/time-systems)",
   "type": "module",
   "version": "0.0.1",
   "private": true,
