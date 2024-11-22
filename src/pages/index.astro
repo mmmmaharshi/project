@@ -1,0 +1,189 @@
+---
+const title = "Time Systems";
+const description =
+  "Stay in sync with global time standards and easily track time across systems like GPS, UTC, and TAI.";
+const favicon =
+  "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>";
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href={favicon} />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="time systems, time, utc, gps, tai, coordinated universal time (utc), global time standards, live time display, time synchronization, time tracking, time tracking software, time tracking tools"
+    />
+    <meta name="author" content="Manohar Maharshi" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <meta property="og:site_name" content={title} />
+
+    <meta
+      property="og:image"
+      content="https://simple-image-compress.vercel.app/og.png"
+    />
+    <meta
+      property="og:url"
+      content="https://simple-image-compress.vercel.app/"
+    />
+    <meta
+      name="twitter:image"
+      content="https://simple-image-compress.vercel.app/og.png"
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main
+      class="min-h-screen container max-w-xl mx-auto flex flex-col items-center justify-center p-10 px-5"
+    >
+      <header class="mb-8 space-y-4">
+        <h1 class="text-4xl text-pretty font-black text-center">{title}</h1>
+        <p class="text-center text-pretty">
+          Stay in sync with global time standards
+        </p>
+      </header>
+      <article class="grid gap-5 mb-5 w-full">
+        <section class="stats bg-base-200 py-3 text-center">
+          <div class="stat space-y-4">
+            <div
+              class="stat-title text-lg text-pretty font-medium text-neutral-content"
+            >
+              Coordinated Universal Time (UTC)
+            </div>
+            <div class="stat-value font-semibold text-3xl" id="utc-time-12">
+            </div>
+          </div>
+        </section>
+
+        <section class="stats bg-base-200 py-3 text-center">
+          <div class="stat space-y-4">
+            <div
+              class="stat-title text-pretty text-lg font-medium text-neutral-content"
+            >
+              Global Positioning System Time (GPS)
+            </div>
+            <div class="stat-value font-semibold text-3xl" id="gps-time-12">
+            </div>
+          </div>
+        </section>
+
+        <section class="stats bg-base-200 py-3 text-center">
+          <div class="stat space-y-4">
+            <div
+              class="stat-title text-pretty text-lg font-medium text-neutral-content"
+            >
+              International Atomic Time (TAI)
+            </div>
+            <div class="stat-value font-semibold text-3xl" id="tai-time-12">
+            </div>
+          </div>
+        </section>
+      </article>
+      <footer class="w-full space-y-3">
+        <details class="bg-base-200 border border-base-300 rounded-md p-4 mt-4">
+          <summary class="text-base font-medium cursor-pointer"
+            >Why So Many Time Systems?</summary
+          >
+          <div class="mt-3 space-y-4">
+            <p>
+              The reason we have multiple time systems is because different
+              systems are optimized for different uses. While UTC is based on
+              Earth's rotation and is used for civil purposes, GPS Time is
+              designed for satellite navigation and does not include leap
+              seconds. TAI is a highly precise time system used primarily in
+              scientific and research applications. Each of these time systems
+              has a specific purpose, and they help us synchronize and measure
+              time in various domains effectively.
+            </p>
+            <p>
+              In summary, different time systems exist because the methods of
+              timekeeping are tailored to meet the needs of specific
+              technologies and purposes. The systems ensure accuracy and
+              consistency depending on their intended use, whether it's for
+              global synchronization, navigation, or scientific experimentation.
+            </p>
+          </div>
+        </details>
+        <details class="bg-base-200 border border-base-300 rounded-md p-4">
+          <summary class="text-base font-medium cursor-pointer"
+            >Learn About Time Systems</summary
+          >
+          <div class="mt-3 space-y-4">
+            <p>
+              <strong>UTC (Coordinated Universal Time):</strong> This is the world's
+              primary time standard for regulating clocks. It is unaffected by daylight
+              saving time and serves as a reference point for time zones globally.
+            </p>
+            <p>
+              <strong>GPS Time:</strong> A continuous time system maintained by the
+              Global Positioning System, based on atomic clocks aboard GPS satellites.
+              GPS Time does not include leap seconds, meaning it is currently ahead
+              of UTC by <strong>18 seconds</strong>.
+            </p>
+            <p>
+              <strong>TAI (International Atomic Time):</strong> This scientific time
+              standard is based on highly accurate atomic vibrations. It does not
+              account for leap seconds and is ahead of UTC by <strong
+                >37 seconds</strong
+              >.
+            </p>
+            <p>
+              <strong>Time Relationships:</strong>
+              <ul class="list-disc ml-5">
+                <li>GPS Time = UTC + 18 seconds</li>
+                <li>TAI Time = UTC + 37 seconds</li>
+                <li>GPS Time = TAI - 19 seconds</li>
+              </ul>
+            </p>
+          </div>
+        </details>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap");
+</style>
+
+<script>
+  function formatDateTime(date, offset) {
+    const adjustedDate = new Date(date.getTime() + offset);
+
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: true,
+    });
+
+    return formatter.format(adjustedDate);
+  }
+
+  function updateTimes() {
+    const nowUTC = new Date();
+
+    const OFFSET_GPS = 18000;
+    const OFFSET_TAI = 37000;
+
+    const utcTime = formatDateTime(nowUTC, 0);
+    const gpsTime = formatDateTime(nowUTC, OFFSET_GPS);
+    const taiTime = formatDateTime(nowUTC, OFFSET_TAI);
+
+    document.getElementById("utc-time-12").innerText = utcTime;
+    document.getElementById("gps-time-12").innerText = gpsTime;
+    document.getElementById("tai-time-12").innerText = taiTime;
+  }
+
+  setInterval(updateTimes, 1000);
+  updateTimes();
+</script>
